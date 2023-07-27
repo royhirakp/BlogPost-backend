@@ -1,0 +1,20 @@
+{
+  "name": "blogpost-backend",
+  "version": "1.0.0",
+  "description": "Level Supermind company assingment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon -r dotenv/config index dotenv_config_path=env/.env",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hirak roy",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1",
+    "os": "^0.1.2"
+  }
+}
