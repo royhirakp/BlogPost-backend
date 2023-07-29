@@ -1,30 +1,21 @@
-// const server = require("./src/server");
-
 const express = require("express");
+require("dotenv").config();
 const app = express();
 
-app.get("/", (req, res) => {
-  res.json({ status: "working " });
-});
-app.get("/path", (req, res) => {
-  res.json({ status: "working /path" });
-});
-
-app.post("/", (req, res) => {
-  let data = req.body.data;
-
-  if (data === undefined) {
-    res.json({ mess: "plese provide data" });
-  } else {
-    res.json({ mess: data + "------data is comming----------" });
-  }
-});
+app.use(express.json());
 // server port
 const port = process.env.PORT || 5000;
+const tokenVarifiction = require("./src/utils/jwtTokenVarification");
 
-app.listen(port, () => {
+app.use("/api/v1/user", require("./src/routes/user"));
+app.use("/api/v1/post", tokenVarifiction, require("./src/routes/posts"));
+app.use("/api/v1/comment", tokenVarifiction, require("./src/routes/comments"));
+
+app.listen(port, (err) => {
+  if (err) console.log("err:", err);
   console.log(`Server is up at ${port} `);
 });
+
 //CLUSTER
 // const cluster = require("cluster");
 // const os = require("os");
@@ -38,7 +29,6 @@ app.listen(port, () => {
 //   });
 // } else {
 //   //connect db
-//   //   require("./src/configDB/db");
 //   // /server start
 //   app.listen(port, () => {
 //     console.log(`Server is up at ${port} `);
