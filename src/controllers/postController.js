@@ -52,9 +52,11 @@ exports.updatePost = async (req, res, next) => {
 };
 
 exports.deletePostByid = async (req, res, next) => {
+  console.log(req.body);
   try {
     const { id } = req.body;
     const userId = req.userId;
+    console.log(req.body, "userId: ", userId);
     let result = await Post.deletePost(id, userId);
     if (result[0].affectedRows == 0) {
       res.status(404).json({
@@ -63,7 +65,10 @@ exports.deletePostByid = async (req, res, next) => {
       });
       return;
     }
-    res.status(200).json({ result });
+    res.status(200).json({
+      working: "wpr",
+      result,
+    });
     return;
   } catch (error) {
     res.status(500).json({
