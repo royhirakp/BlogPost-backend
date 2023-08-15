@@ -42,7 +42,8 @@ exports.userLogin = async (req, res, next) => {
             exp: Math.floor(Date.now() / 1000) + 60 * 60,
             data: user[0][0].id, //
           },
-          process.env.JWTKEY
+          "hirak"
+          // process.env.JWTKEY
         );
         res.json({
           status: "sucesess",
