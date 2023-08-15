@@ -2,6 +2,7 @@ const Comment = require("../models/comment");
 
 exports.createComment = async (req, res, next) => {
   try {
+    console.log("from create commnet route ==", req.body);
     const { postId, userEmail, body } = req.body;
     const newComment = new Comment(postId, userEmail, body);
     await newComment.save();
@@ -16,7 +17,7 @@ exports.createComment = async (req, res, next) => {
 
 exports.getAllcommentsByPostId = async (req, res, next) => {
   try {
-    const comments = await Comment.findComments(req.body.postId);
+    const comments = await Comment.findComments(req.params.postId);
     res.status(200).json({ data: comments[0] });
   } catch (error) {
     res.status(500).json({
